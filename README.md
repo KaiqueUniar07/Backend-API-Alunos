@@ -15,6 +15,6 @@ Esta é a API da aplicação de Cadastro de Alunos, desenvolvido com Spring Boot
 - URL da api:
 - http://localhost:8080/projeto/api/v1/aluno
 
-## OBS
+## Observação
 
 - Certificar que o Front-end(React) está rodando e recebendo as requisições
