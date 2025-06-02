@@ -1,15 +1,37 @@
 pipeline {
     agent any
+
+    environment {
+        JAVA_HOME = tool name: 'JDK 21', type: 'jdk'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Clonar Repositório') {
             steps {
-                git 'https://github.com/KaiqueUniar07/Backend-API-Alunos.git'
+                git url: 'https://github.com/KaiqueUniar07/Backend-API-Alunos.git', branch: 'main'
             }
         }
-        stage('Build e Testes') {
+
+        stage('Build') {
             steps {
-                bat 'mvn clean install'
+                sh './mvnw clean package -DskipTests'
             }
+        }
+
+        stage('Testes') {
+            steps {
+                sh './mvnw test'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline finalizada com sucesso.'
+        }
+        failure {
+            echo 'Erro na Pipeline.'
         }
     }
 }
