@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        JAVA_HOME = tool name: 'JDK 21', type: 'jdk'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+        JAVA_HOME = tool(name: 'JDK 21', type: 'jdk')
+        PATH = "${env.PATH};${JAVA_HOME}\\bin"
     }
 
     stages {
@@ -15,13 +15,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat './mvnw clean package -DskipTests'
+                bat 'mvnw clean package -DskipTests'
             }
         }
 
         stage('Testes') {
             steps {
-                bat './mvnw test'
+                bat 'mvnw test'
             }
         }
     }
