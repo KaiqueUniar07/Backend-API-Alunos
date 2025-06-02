@@ -13,15 +13,9 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build e Testes') {
             steps {
-                sh './mvnw clean package -DskipTests'
-            }
-        }
-
-        stage('Testes') {
-            steps {
-                sh './mvnw test'
+                sh './mvnw clean package'
             }
         }
     }
